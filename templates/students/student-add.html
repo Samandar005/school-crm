@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {% if student %} Maktab CRM - O'quvchini tahrirlash {% else %} Maktab CRM - O'quvchi yaratish {% endif %} {% endblock %}
+
+{% block content %}
+    <h1>{% if student %} O'quvchini tahrirlash {% else %} O'quvchi yaratish {% endif %}</h1>
+    <form id="createStudentForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="first_name">Ism:</label>
+            <input type="text" id="first_name" name="first_name" placeholder="Ism kiriting" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Familiya:</label>
+            <input type="text" id="last_name" name="last_name" placeholder="Familiya kiriting" required>
+        </div>
+        <div class="form-group">
+            <label for="group">Guruh:</label>
+            <select id="group" name="group" required>
+                <option value="">Guruhni tanlang</option>
+                <option value="Guruh 1">Guruh 1</option>
+                <option value="Guruh 2">Guruh 2</option>
+                <option value="Guruh 3">Guruh 3</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="date_of_birth">Tug'ilgan sana:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
+        </div>
+        <div class="form-group">
+            <label for="telephone_number">Telefon:</label>
+            <input type="number" id="telephone_number" name="telephone_number" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Manzil:</label>
+            <input type="text" id="address" name="address" placeholder="Tashkent, Yunusobod" required>
+        </div>
+        <div class="form-group">
+            <label for="image">Rasm:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <div class="actions">
+            {% if student %}
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Tahrirlash</button>
+                <a href="{{ student.get_detail_url }}" class="btn btn-secondary"><i class="fas fa-times"></i> Back to Detail</a>
+            {% else %}
+                <button type="submit" class="btn"><i class="fas fa-save"></i> Saqlash</button>
+                <a href="{% url 'students:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
