@@ -13,16 +13,19 @@ def group_list(request):
 def group_create(request):
     if request.method == 'POST':
         group_name = request.POST.get('group_name')
-        teachers = request.POST.get('teachers')
+        teacher_id = request.POST.get('teachers')
         students = request.POST.get('students')
-        if group_name and students and teachers:
+        if group_name and students and teacher_id:
+            teacher = Teacher.objects.get(id=teacher_id)
             Group.objects.create(
                 group_name = group_name,
-                teachers = teachers,
+                teachers = teacher,
                 students=students,
             )
             return redirect('groups:list')
-    return render(request, 'groups/group-add.html', )
+    teachers = Teacher.objects.all()
+    ctx = {'teachers': teachers}
+    return render(request, 'groups/group-add.html', ctx)
 
 def group_update(request, pk):
     group = get_object_or_404(Group, pk=pk)

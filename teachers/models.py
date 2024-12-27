@@ -13,7 +13,7 @@ class Teacher(models.Model):
     work_expert = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.first_name, self.last_name
+        return f"{self.first_name} {self.last_name}"
 
     def get_detail_url(self):
         return reverse('teachers:detail', args=[self.pk])

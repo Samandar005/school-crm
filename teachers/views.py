@@ -13,15 +13,15 @@ def teacher_create(request):
         image = request.FILES.get('image')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        subject = request.POST.get('subject')
+        subject_name = request.POST.get('subject')
         telephone_number = request.POST.get('telephone_number')
         email = request.POST.get('email')
         work_expert = request.POST.get('work_expert')
         if (
-            image and first_name and last_name and subject and
+            image and first_name and last_name and subject_name and
                 telephone_number and email and work_expert
         ):
-            subject = Subject.objects.get(name=subject)
+            subject = Subject.objects.get(name=subject_name)
             Teacher.objects.create(
                 image=image,
                 first_name=first_name,
@@ -32,7 +32,9 @@ def teacher_create(request):
                 work_expert=work_expert,
             )
             return redirect('teachers:list')
-    return render(request, 'teachers/teacher-add.html')
+    subjects = Subject.objects.all()
+    ctx = {'subjects': subjects}
+    return render(request, 'teachers/teacher-add.html', ctx)
 
 def teacher_update(request, pk):
     teacher = get_object_or_404(Teacher, pk=pk)
@@ -40,14 +42,15 @@ def teacher_update(request, pk):
         image = request.FILES.get('image')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
-        subject = request.POST.get('subject')
+        subject_name = request.POST.get('subject')
         telephone_number = request.POST.get('telephone_number')
         email = request.POST.get('email')
         work_expert = request.POST.get('work_expert')
         if (
-                image and first_name and last_name and subject and
+                image and first_name and last_name and subject_name and
                 telephone_number and email and work_expert
         ):
+            subject = Subject.objects.get(name=subject_name)
             teacher.image=image
             teacher.first_name=first_name
             teacher.last_name=last_name
@@ -57,7 +60,9 @@ def teacher_update(request, pk):
             teacher.work_expert=work_expert
             teacher.save()
             return redirect(teacher.get_detail_url())
-    ctx = {'teacher':teacher}
+    subjects = Subject.objects.all()
+    ctx = {'teacher':teacher,
+           'subjects': subjects,}
     return render(request, 'teachers/teacher-add.html', ctx)
 
 def teacher_detail(request, pk):

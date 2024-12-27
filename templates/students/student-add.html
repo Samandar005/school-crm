@@ -9,36 +9,45 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="first_name">Ism:</label>
-            <input type="text" id="first_name" name="first_name" placeholder="Ism kiriting" required>
+            <input type="text" id="first_name" name="first_name" placeholder="Ism kiriting" value="{{ student.first_name }}" required>
         </div>
         <div class="form-group">
             <label for="last_name">Familiya:</label>
-            <input type="text" id="last_name" name="last_name" placeholder="Familiya kiriting" required>
+            <input type="text" id="last_name" name="last_name" placeholder="Familiya kiriting" value="{{ student.last_name }}" required>
         </div>
         <div class="form-group">
             <label for="group">Guruh:</label>
             <select id="group" name="group" required>
-                <option value="">Guruhni tanlang</option>
-                <option value="Guruh 1">Guruh 1</option>
-                <option value="Guruh 2">Guruh 2</option>
-                <option value="Guruh 3">Guruh 3</option>
+                    <option value="">Guruhni tanlang</option>
+                {% for group in groups %}
+                    <option value="{{ group.group_name }}">{{ group.group_name }}</option>
+                {% endfor %}
             </select>
         </div>
+
         <div class="form-group">
-            <label for="date_of_birth">Tug'ilgan sana:</label>
-            <input type="date" id="date_of_birth" name="date_of_birth" required>
+                <label for="date_of_birth">Release Date</label>
+            {% if student.date_of_birth %}
+                <input type="date" id="date_of_birth" name="date_of_birth" value="{{ student.date_of_birth|date:'Y-m-d' }}">
+            {% else %}
+                <input type="date" id="date_of_birth" name="date_of_birth">
+            {% endif %}
         </div>
+
         <div class="form-group">
             <label for="telephone_number">Telefon:</label>
-            <input type="number" id="telephone_number" name="telephone_number" required>
+            <input type="number" id="telephone_number" name="telephone_number" value="{{ student.telephone_number }}" required>
         </div>
         <div class="form-group">
             <label for="address">Manzil:</label>
-            <input type="text" id="address" name="address" placeholder="Tashkent, Yunusobod" required>
+            <textarea name="address" id="address" cols="30" rows="10" placeholder="Yashash manzilizni kriting">{{ student.address }}</textarea>
         </div>
         <div class="form-group">
-            <label for="image">Rasm:</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+             <label for="image">Cover Image</label>
+            {% if student.image %}
+            <img src="{{ student.image.url }}" alt="{{ student.first_name }} {{ student.last_name }}" class="image" style="width: 350px; height: 200px;">
+            {% endif %}
+            <input type="file" id="image" name="image" accept="image/*">
         </div>
         <div class="actions">
             {% if student %}

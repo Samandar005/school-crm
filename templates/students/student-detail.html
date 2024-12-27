@@ -10,7 +10,7 @@
                 <img src="{{ student.image.url }}" alt="O'quvchi rasmi" id="studentImage" class="student-image">
                 <h2 id="studentName">{{ student.first_name }} {{ student.last_name }}</h2>
                 <p>ID: <span id="studentId">{{ student.id }}</span></p>
-                <p>Guruh: <span id="studentGroup">9-B</span></p>
+                <p>Guruh: <span id="studentGroup">{{ student.group }}</span></p>
                 <p>Tug'ilgan sana: <span id="studentBirthDate">{{ student.date_of_birth }}</span></p>
                 <p>Telefon: <span id="studentPhone">{{ student.telephone_number }}</span></p>
                 <p>Manzil: <span id="studentAddress">{{ student.address }}</span></p>

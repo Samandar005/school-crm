@@ -11,7 +11,7 @@
             <img src="{{ teacher.image.url }}" alt="O'qituvchi rasmi" class="teacher-image">
             <h2>{{ teacher.first_name }} {{ teacher.last_name }}</h2>
             <p>ID: <span>{{ teacher.id }}</span></p>
-            <p>Fan: <span>Matematika</span></p>
+            <p>Fan: <span>{{ teacher.subject }}</span></p>
             <p>Telefon: <span>{{ teacher.telephone_number }}</span></p>
             <p>Email: <span>{{ teacher.email }}</span></p>
             <p>Ish tajribasi: <span>{{ teacher.work_expert }}</span></p>

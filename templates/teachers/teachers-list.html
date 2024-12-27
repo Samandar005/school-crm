@@ -6,7 +6,7 @@
 {% block content %}
     <h1>O'qituvchilar ro'yxati</h1>
     <div class="actions">
-        <a href="{% url 'teachers:list' %}" class="btn"><i class="fas fa-plus"></i> Yangi o'qituvchi qo'shish</a>
+        <a href="{% url 'teachers:create' %}" class="btn"><i class="fas fa-plus"></i> Yangi o'qituvchi qo'shish</a>
         <input type="text" id="searchStudent" placeholder="O'qituvchi qidirish" class="search-input">
     </div>
     <table id="teachersTable">
@@ -25,7 +25,7 @@
                 <td>{{ teacher.id }}</td>
                 <td>{{ teacher.first_name }}</td>
                 <td>{{ teacher.last_name }}</td>
-                <td>Matematika</td>
+                <td>{{ teacher.subject }}</td>
                 <td>
                     <a href="{{ teacher.get_detail_url }}" class="btn btn-sm"><i class="fas fa-eye"></i> Ko'rish</a>
                     <a href="{{ teacher.get_update_url }}" class="btn btn-sm"><i class="fas fa-edit"></i> Tahrirlash</a>

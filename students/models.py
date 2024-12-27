@@ -13,7 +13,7 @@ class Student(models.Model):
     address = models.TextField()
 
     def __str__(self):
-        return self.first_name, self.last_name
+        return f"{self.first_name} {self.last_name}"
 
     def get_detail_url(self):
         return reverse('students:detail', args=[self.pk])

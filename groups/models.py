@@ -5,7 +5,7 @@ from django.shortcuts import reverse
 
 class Group(models.Model):
     group_name = models.CharField(max_length=100)
-    teachers = models.OneToOneField(Teacher, on_delete=models.CASCADE, related_name='group_teacher')
+    teachers = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='group_teacher')
     students = models.CharField(max_length=100)
 
     def __str__(self):
