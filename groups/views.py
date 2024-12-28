@@ -1,9 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Group, Teacher
+from .models import Group
+from teachers.models import Teacher
+from students.models import Student
+from subjects.models import Subject
 
 
 def home(request):
-    return render(request, 'index.html')
+    ctx = {
+        'teachers_count': Teacher.objects.count(),
+        'groups_count': Group.objects.count(),
+        'students_count': Student.objects.count(),
+        'subjects_count': Subject.objects.count(),
+    }
+    return render(request, 'index.html', ctx)
 
 def group_list(request):
     groups = Group.objects.all()

@@ -8,7 +8,7 @@
     <div class="teacher-details">
         <div class="teacher-info">
             <!-- Static Teacher Image -->
-            <img src="{{ teacher.image.url }}" alt="O'qituvchi rasmi" class="teacher-image">
+            <img src="{{ teacher.image.url }}" alt="{{ teacher.first_name }}{{ teacher.last_name }}" class="teacher-image">
             <h2>{{ teacher.first_name }} {{ teacher.last_name }}</h2>
             <p>ID: <span>{{ teacher.id }}</span></p>
             <p>Fan: <span>{{ teacher.subject }}</span></p>

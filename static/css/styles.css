@@ -261,3 +261,8 @@ input::placeholder {
     color: #aaa;
     font-style: italic;
 }
+
+.student-image {
+  width: 400px;
+  height: 300px;
+}

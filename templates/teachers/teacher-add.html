@@ -5,7 +5,8 @@
 
 {% block content %}
         <h1>{% if teacher %} O'qituvchini tahrirlash {% else %} Yangi O'qituvchi yaratish {% endif %}</h1>
-        <form id="createTeacherForm">
+        <form id="createTeacherForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="first_name">Ism:</label>
                 <input type="text" id="first_name" name="first_name" placeholder="Ismingizni kiriting" value="{{ teacher.first_name }}" required>
@@ -18,13 +19,13 @@
                 <label for="subject">Fan:</label>
                 <select id="subject" name="subject" required>
                     {% for subject in subjects %}
-                        <option value="{{ subject.teacher_subject }}">{{ subject.teacher_subject }}</option>
+                        <option value="{{ subject.subject_name }}">{{ subject.subject_name }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="form-group">
                 <label for="telephone_number">Telefon:</label>
-                <input type="number" id="telephone_number" name="telephone_number" placeholder="Telefon raqamingizni kiriting" value="{{ teacher.telephone_number }}" required>
+                <input type="tel" id="telephone_number" name="telephone_number" placeholder="Telefon raqamingizni kiriting" value="{{ teacher.telephone_number }}" required>
             </div>
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -37,19 +38,18 @@
             <div class="form-group">
                     <label for="image">Image: </label>
                 {% if teacher.image %}
-                    <img src="{{ taacher.image.url }}" alt="{{ teacher.first_name }} {{ teacher.last_name }}" class="image" style="width: 350px; height: 200px;">
+                    <img src="{{ taacher.image.url }}" alt="{{ teacher.first_name }} {{ teacher.last_name }}" class="image" style="width: 400px; height: 300px;">
                 {% endif %}
                     <input type="file" id="image" name="image" accept="image/*">
             </div>
 
             <div class="actions">
                 {% if teacher %}
-                    <button type="submit" class="btn"><i class="fas fa-save"></i> Tahrirlash</button>
-                    <a href="{{ teacher.get_detail_url }}" class="btn btn-secondary"><i class="fas fa-times"></i> Back to Detail</a>
-
+                    <button type="submit" class="btn"> Tahrirlash</button>
+                    <a href="{{ teacher.get_detail_url }}" class="btn btn-secondary"> Back to Detail</a>
                 {% else %}
-                    <button type="submit">class="btn"><i class="fas fa-save"></i> Saqlash</button>
-                    <a href="{% url 'teachers:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+                    <button type="submit">class="btn"> Saqlash</button>
+                    <a href="{% url 'teachers:list' %}" class="btn btn-secondary"> Bekor qilish</a>
                 {% endif %}
             </div>
         </form>
